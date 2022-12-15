@@ -12,19 +12,19 @@ class UserMessages extends Model implements IUserMessages{
 }
 
 UserMessages.init({
-  user_id: {
+  userId: {
     type: INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
-  chat_id: {
+  chatId: {
     type: INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
-  message_id: {
+  messageId: {
     type: INTEGER,
     allowNull: false,
     primaryKey: true,

@@ -10,7 +10,7 @@ export default (req: Request, res: Response, next: NextFunction): void | Respons
   try {
     const user = jwt.verify(token, secret) as IToken;
     if (!user) return res.status(401).json({ message: 'Invalid token' });
-    req.body = { user, ...req.body };
+    req.body = { ...user, ...req.body };
     next();
   } catch (err) {
     res.status(401).json({ message: 'Invalid token' });    

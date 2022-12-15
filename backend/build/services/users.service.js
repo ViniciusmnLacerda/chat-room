@@ -25,18 +25,19 @@ const login = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const { type, message } = yield (0, validations_1.loginValidation)(user);
     if (type)
         return { type, message };
-    const token = (0, jwtFunctions_1.createToken)(user);
+    const userLoged = yield Users_1.default.findOne({ where: { email: user.email } });
+    const token = (0, jwtFunctions_1.createToken)(userLoged);
     return { type: null, message: token };
 });
 const signup = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const { type, message } = yield (0, validations_1.signupValidation)(user);
     if (type)
         return { type, message };
+    const { password: pw } = user;
     const hashedPassword = (0, hashPassword_1.default)(user.password);
     user.password = hashedPassword;
-    const newUser = yield Users_1.default.create(Object.assign({}, user));
-    const goToHome = yield login(newUser);
-    return goToHome;
+    yield Users_1.default.create(Object.assign({}, user));
+    return { type: null, message: 'successfully registered user' };
 });
 exports.default = {
     getAll,

@@ -21,6 +21,8 @@ const getAll = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = req.body;
     const { type, message } = yield users_service_1.default.login(user);
+    if (type)
+        return res.status((0, mapError_1.default)(type)).json({ message });
     res.status(200).json({ token: message });
 });
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,7 +30,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { type, message } = yield users_service_1.default.signup(user);
     if (type)
         return res.status((0, mapError_1.default)(type)).json({ message });
-    res.status(201).json({ token: message });
+    res.status(201).json({ message });
 });
 exports.default = {
     getAll,

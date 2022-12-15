@@ -3,7 +3,7 @@ import userModel from '../../database/models/Users';
 import IReturn from "../../interfaces/returns.interface";
 import IUser from "../../interfaces/user.interface";
 
-const loginValidation = async ({ email, password}: IUser): Promise<IReturn<string>> => {
+const loginValidation = async ({ email, password }: IUser): Promise<IReturn<string>> => {
   const users = await userModel.findAll(); 
   const user = users.find((u) => u.email === email);
   if (!user) return { type: 'INVALID_VALUE', message: 'Email or password are invalid'}

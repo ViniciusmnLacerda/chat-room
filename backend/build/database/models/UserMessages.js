@@ -11,19 +11,19 @@ const Users_1 = __importDefault(require("./Users"));
 class UserMessages extends sequelize_1.Model {
 }
 UserMessages.init({
-    user_id: {
+    userId: {
         type: sequelize_1.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
     },
-    chat_id: {
+    chatId: {
         type: sequelize_1.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
     },
-    message_id: {
+    messageId: {
         type: sequelize_1.INTEGER,
         allowNull: false,
         primaryKey: true,

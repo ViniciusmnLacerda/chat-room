@@ -12,16 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const bcrypt_1 = __importDefault(require("bcrypt"));
-const Users_1 = __importDefault(require("../../database/models/Users"));
-const loginValidation = ({ email, password }) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield Users_1.default.findAll();
-    const user = users.find((u) => u.email === email);
-    if (!user)
-        return { type: 'INVALID_VALUE', message: 'Email or password are invalid' };
-    const passwordIsValid = yield bcrypt_1.default.compare(password, user.password);
-    if (!passwordIsValid)
-        return { type: 'INVALID_VALUE', message: 'Email or password are invalid' };
-    return { type: null, message: '' };
+const sequelize_1 = require("sequelize");
+const UserChat_1 = __importDefault(require("../database/models/UserChat"));
+const getAll = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const chats = yield UserChat_1.default.findAll({
+        where: {
+            [sequelize_1.Op.or]: [
+                { userId: id },
+                { chatId: id }
+            ]
+        }
+    });
+    return { type: null, message: chats };
 });
-exports.default = loginValidation;
+exports.default = {
+    getAll,
+};

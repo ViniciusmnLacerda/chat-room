@@ -10,17 +10,15 @@ class UserChats extends Model implements IUserChats {
 }
 
 UserChats.init({
-  user_id: {
+  userId: {
     type: INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true,
   },
-  chat_id: {
+  chatId: {
     type: INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true,
   },
 }, {
   sequelize: db,
@@ -31,11 +29,11 @@ UserChats.init({
 })
 
 UserChats.belongsTo(Users, {
-  foreignKey: 'user_id',
+  foreignKey: 'userId',
 });
 
 UserChats.belongsTo(Chats, {
-  foreignKey: 'chat_id',
+  foreignKey: 'chatId',
 });
 
 export default UserChats;

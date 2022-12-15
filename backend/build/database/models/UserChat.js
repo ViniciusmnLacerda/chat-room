@@ -10,17 +10,15 @@ const Users_1 = __importDefault(require("./Users"));
 class UserChats extends sequelize_1.Model {
 }
 UserChats.init({
-    user_id: {
+    userId: {
         type: sequelize_1.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
     },
-    chat_id: {
+    chatId: {
         type: sequelize_1.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
     },
 }, {
     sequelize: _1.default,
@@ -30,9 +28,9 @@ UserChats.init({
     underscored: true,
 });
 UserChats.belongsTo(Users_1.default, {
-    foreignKey: 'user_id',
+    foreignKey: 'userId',
 });
 UserChats.belongsTo(Chats_1.default, {
-    foreignKey: 'chat_id',
+    foreignKey: 'chatId',
 });
 exports.default = UserChats;

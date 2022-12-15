@@ -1,4 +1,4 @@
-import { DATE, INTEGER, Model } from "sequelize";
+import { DataTypes, DATE, INTEGER, Model } from "sequelize";
 import db from '.';
 import IChats from "../../interfaces/chats.interface";
 
@@ -16,6 +16,7 @@ Chats.init({
   },
   createdAt: {
     type: DATE,
+    defaultValue: DataTypes.NOW,
     allowNull: false,
   }
 }, {

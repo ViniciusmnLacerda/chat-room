@@ -16,6 +16,7 @@ Chats.init({
     },
     createdAt: {
         type: sequelize_1.DATE,
+        defaultValue: sequelize_1.DataTypes.NOW,
         allowNull: false,
     }
 }, {
