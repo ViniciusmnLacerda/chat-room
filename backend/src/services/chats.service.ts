@@ -18,11 +18,11 @@ const getAll = async (id: number): Promise<IReturn<IMyChats[]>> => {
 
   const listOfChats = await Promise.all(promises)
   const onlyId = listOfChats.flat().map(({ userId }) => userId);
-  const result = [...new Set(onlyId)].filter((i) => i !== id)
+  const result = [...new Set(onlyId)].filter((i) => i !== id);
 
-  const promise = result.map(async (u) => userModel.findByPk(u));
-  const newResult = await Promise.all(promise) as IUser[];
-  const myUsersChat = newResult.map((obj) => ({
+  const usersChat = result.map(async (u) => userModel.findByPk(u));
+  const promiseUsersChat = await Promise.all(usersChat) as IUser[];
+  const myUsersChat = promiseUsersChat.map((obj) => ({
     name: obj.name,
     lastName: obj.lastName,
     username: obj.username,
