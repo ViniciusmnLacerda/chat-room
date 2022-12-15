@@ -1,8 +1,8 @@
 interface IUser {
   id?: number;
-  username: string;
-  name: string;
-  lastName: string;
+  username?: string;
+  name?: string;
+  lastName?: string;
   email: string;
   password?: string;
   image?: string;

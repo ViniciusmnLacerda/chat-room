@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const _1 = __importDefault(require("."));
-const Users_1 = __importDefault(require("./Users"));
 class Chats extends sequelize_1.Model {
 }
 Chats.init({
@@ -25,9 +24,5 @@ Chats.init({
     tableName: 'chats',
     timestamps: false,
     underscored: true,
-});
-Chats.hasMany(Users_1.default, {
-    foreignKey: 'chat_id',
-    as: 'userchats'
 });
 exports.default = Chats;

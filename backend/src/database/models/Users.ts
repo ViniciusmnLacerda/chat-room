@@ -27,7 +27,7 @@ Users.init({
     type: STRING,
     allowNull: false,
   },
-  last_name: {
+  lastName: {
     type: STRING,
     allowNull: false,
   },
@@ -45,10 +45,10 @@ Users.init({
   }
 }, {
   sequelize: db,
+  underscored: true,
   modelName: 'users',
   tableName: 'users',
   timestamps: false,
-  underscored: true,
 })
 
 

@@ -12,11 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const users_service_1 = __importDefault(require("../services/users.service"));
-const getAll = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { message } = yield users_service_1.default.getAll();
-    res.status(200).json(message);
+const Users_1 = __importDefault(require("../../database/models/Users"));
+const signupValidation = ({ email, username }) => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield Users_1.default.findAll();
+    const isEmailValid = users.find((u) => u.email === email);
+    if (isEmailValid)
+        return { type: 'INVALID_VALUE', message: 'Email is already in use' };
+    const isUsernameValid = users.find((u) => u.username === username);
+    if (isUsernameValid)
+        return { type: 'INVALID_VALUE', message: 'Username is already in use' };
+    return { type: null, message: '' };
 });
-exports.default = {
-    getAll,
-};
+exports.default = signupValidation;

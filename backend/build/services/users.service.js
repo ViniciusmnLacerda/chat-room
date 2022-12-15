@@ -12,11 +12,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const hashPassword_1 = __importDefault(require("../auth/hashPassword"));
+const jwtFunctions_1 = require("../auth/jwtFunctions");
 const Users_1 = __importDefault(require("../database/models/Users"));
+const validations_1 = require("./validations");
 const getAll = () => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield Users_1.default.findAll();
-    return users;
+    return { type: null, message: users };
+});
+//o login será feito com email e password
+const login = (user) => __awaiter(void 0, void 0, void 0, function* () {
+    const { type, message } = yield (0, validations_1.loginValidation)(user);
+    if (type)
+        return { type, message };
+    const token = (0, jwtFunctions_1.createToken)(user);
+    return { type: null, message: token };
+});
+const signup = (user) => __awaiter(void 0, void 0, void 0, function* () {
+    const { type, message } = yield (0, validations_1.signupValidation)(user);
+    if (type)
+        return { type, message };
+    const hashedPassword = (0, hashPassword_1.default)(user.password);
+    user.password = hashedPassword;
+    const newUser = yield Users_1.default.create(Object.assign({}, user));
+    const goToHome = yield login(newUser);
+    return goToHome;
 });
 exports.default = {
     getAll,
+    login,
+    signup,
 };

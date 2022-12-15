@@ -1,10 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const user_controller_1 = __importDefault(require("../controllers/user.controller"));
+const controllers_1 = require("../controllers");
+const middlewares_1 = require("../middlewares");
 const router = (0, express_1.Router)();
-router.get('/', user_controller_1.default.getAll);
+router.get('/', controllers_1.usersController.getAll);
+router.post('/', middlewares_1.loginMiddleware, controllers_1.usersController.login);
+router.post('/signup', middlewares_1.signupMiddleware, controllers_1.usersController.signup);
 exports.default = router;
