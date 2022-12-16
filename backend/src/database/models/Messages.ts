@@ -1,4 +1,4 @@
-import { DATE, INTEGER, Model, STRING } from 'sequelize';
+import { DataTypes, DATE, INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
 import IMessage from '../../interfaces/messages.interface';
 
@@ -23,7 +23,7 @@ Messages.init({
   },
   date: {
     type: DATE,
-    allowNull: false,
+    defaultValue: DataTypes.NOW,
   }
 }, {
   sequelize: db,

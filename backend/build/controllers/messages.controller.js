@@ -22,6 +22,13 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status((0, mapError_1.default)(type)).json({ message });
     res.status(200).json(message);
 });
+const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { message } = req.body;
+    const { chatId } = req.params;
+    const { message: result } = yield services_1.messagesService.create(+chatId, message);
+    res.status(201).json(result);
+});
 exports.default = {
     getAll,
+    create,
 };

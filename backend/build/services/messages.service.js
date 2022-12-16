@@ -37,10 +37,18 @@ const getAll = (chatId, userId) => __awaiter(void 0, void 0, void 0, function* (
             message: messages[index].message,
             date: messages[index].date,
             username: usernames[index].username,
+            name: usernames[index].name,
+            lastName: usernames[index].lastName,
         });
     });
     return { type: null, message: result };
 });
+const create = (chatId, message) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('AQUI: ', message);
+    const { id: messageId } = yield Messages_1.default.create({ message });
+    return { type: null, message: messageId };
+});
 exports.default = {
     getAll,
+    create
 };

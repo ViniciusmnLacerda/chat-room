@@ -9,8 +9,8 @@ import { messagesValidation } from './validations';
 
 
 const getAll = async (chatId: number, userId: number): Promise<IReturn<IMsg | string>> => {
-  const { type, message} = await messagesValidation(chatId, userId)
-  if (type) return { type, message }
+  const { type, message } = await messagesValidation(chatId, userId);
+  if (type) return { type, message };
   const userMessages = await userMessagesModel.findAll({ where: { chatId }});
 
   const messagesPromises = userMessages.map(async ({ messageId }) => {
@@ -35,14 +35,21 @@ const getAll = async (chatId: number, userId: number): Promise<IReturn<IMsg | st
       username: usernames[index].username,
       name: usernames[index].name,
       lastName: usernames[index].lastName,
-    })
+    });
   })
 
   return { type: null, message: result };
 } 
 
+const create = async (chatId: number, userId: number, message: string) => {
+  const { id: messageId } = await messagesModel.create({ message });
+  await userMessagesModel.create({ userId, chatId, messageId });
+  return { type: null, message: 'Message created successfully' }
+}
+
 export default {
   getAll,
+  create
 }
 
 

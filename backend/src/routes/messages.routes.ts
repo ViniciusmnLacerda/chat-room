@@ -10,4 +10,10 @@ router.get(
   messagesController.getAll,
 )
 
+router.post(
+  '/:chatId',
+  verifyJwt,
+  messagesController.create
+)
+
 export default router;

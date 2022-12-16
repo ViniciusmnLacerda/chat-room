@@ -50,7 +50,7 @@ const create = async (username: string, id: number): Promise<IReturn<string>> =>
   const result = await userModel.findOne({ where: { username }});
   const { id: userId } = result as IUser;
   await userChatsModel.create({ userId, chatId});
-  return { type: null, message: 'chat created successfully' }
+  return { type: null, message: 'Chat created successfully' }
 }
 
 export default {

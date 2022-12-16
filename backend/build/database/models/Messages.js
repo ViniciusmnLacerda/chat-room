@@ -20,7 +20,7 @@ Messages.init({
     },
     date: {
         type: sequelize_1.DATE,
-        allowNull: false,
+        defaultValue: sequelize_1.DataTypes.NOW,
     }
 }, {
     sequelize: _1.default,

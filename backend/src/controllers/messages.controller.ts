@@ -10,6 +10,14 @@ const getAll = async (req: Request, res: Response) => {
   res.status(200).json(message)
 }
 
+const create = async (req: Request, res: Response) => {
+  const { message, user: { id: userId }  } = req.body;
+  const { chatId } = req.params;
+  const { message: result } = await messagesService.create(+chatId, +userId, message)
+  res.status(201).json({ message: result });
+}
+
 export default {
   getAll,
+  create,
 }
