@@ -6,10 +6,7 @@ const signupMiddleware = (req: Request, res: Response, next: NextFunction): Resp
   const user = req.body;
   const { error } = signupSchema.validate(user);
   if (error) {
-    const { type } = error.details[0];
-    const { message } = error.details[0];
-    console.log('TYPE: ', type);
-    
+    const { type, message } = error.details[0];   
     return res.status(mapError(type)).json({ message });
   } 
   next();

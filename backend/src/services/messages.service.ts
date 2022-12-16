@@ -41,15 +41,15 @@ const getAll = async (chatId: number, userId: number): Promise<IReturn<IMsg | st
   return { type: null, message: result };
 } 
 
-const create = async (chatId: number, userId: number, message: string) => {
+const create = async (chatId: number, userId: number, message: string): Promise<IReturn<string>> => {
   const { id: messageId } = await messagesModel.create({ message });
   await userMessagesModel.create({ userId, chatId, messageId });
-  return { type: null, message: 'Message created successfully' }
+  return { type: null, message: 'Message created successfully' };
 }
 
 export default {
   getAll,
-  create
+  create,
 }
 
 

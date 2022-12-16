@@ -6,9 +6,7 @@ const loginMiddleware = (req: Request, res: Response, next: NextFunction): Respo
   const user = req.body;
   const { error } = loginSchema.validate(user);
   if (error) {
-    const { type } = error.details[0];
-    const { message } = error.details[0];
-   
+    const { type, message } = error.details[0];  
     return res.status(mapError(type)).json({ message });
   } 
   next();

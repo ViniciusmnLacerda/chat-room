@@ -14,7 +14,12 @@ const signupSchema = Joi.object({
   image: Joi.string(),
 })
 
+const messagesSchema = Joi.object({
+  message: Joi.string().required(),
+})
+
 export {
   loginSchema,
   signupSchema,
+  messagesSchema,
 };
