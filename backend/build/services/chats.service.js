@@ -12,18 +12,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const sequelize_1 = require("sequelize");
 const UserChat_1 = __importDefault(require("../database/models/UserChat"));
+const Users_1 = __importDefault(require("../database/models/Users"));
 const getAll = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const chats = yield UserChat_1.default.findAll({
-        where: {
-            [sequelize_1.Op.or]: [
-                { userId: id },
-                { chatId: id }
-            ]
-        }
+        where: { userId: id }
     });
-    return { type: null, message: chats };
+    const promises = chats.map(({ chatId }) => __awaiter(void 0, void 0, void 0, function* () {
+        const userIds = yield UserChat_1.default.findAll({
+            where: { chatId }
+        });
+        return userIds;
+    }));
+    const listOfChats = yield Promise.all(promises);
+    const onlyId = listOfChats.flat().map(({ userId }) => userId);
+    const result = [...new Set(onlyId)].filter((i) => i !== id);
+    const usersChat = result.map((u) => __awaiter(void 0, void 0, void 0, function* () { return Users_1.default.findByPk(u); }));
+    const promiseUsersChat = yield Promise.all(usersChat);
+    const myUsersChat = promiseUsersChat.map((obj) => ({
+        name: obj.name,
+        lastName: obj.lastName,
+        username: obj.username,
+        image: obj.image,
+    }));
+    return { type: null, message: myUsersChat };
 });
 exports.default = {
     getAll,

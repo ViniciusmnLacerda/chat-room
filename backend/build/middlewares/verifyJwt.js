@@ -13,7 +13,7 @@ exports.default = (req, res, next) => {
         const user = jsonwebtoken_1.default.verify(token, secret);
         if (!user)
             return res.status(401).json({ message: 'Invalid token' });
-        req.body = Object.assign({ user }, req.body);
+        req.body = Object.assign(Object.assign({}, user), req.body);
         next();
     }
     catch (err) {
