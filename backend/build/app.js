@@ -11,4 +11,5 @@ app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 app.use('/home', index_1.usersRoute);
 app.use('/chats', index_1.chatsRoute);
+app.use('/messages', index_1.messagesRoute);
 exports.default = app;

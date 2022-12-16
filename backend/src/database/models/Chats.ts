@@ -17,14 +17,12 @@ Chats.init({
   createdAt: {
     type: DATE,
     defaultValue: DataTypes.NOW,
-    allowNull: false,
   }
 }, {
   sequelize: db,
   modelName: 'chats',
   tableName: 'chats',
   timestamps: false,
-  underscored: true,
 })
 
 export default Chats;

@@ -15,19 +15,16 @@ UserMessages.init({
         type: sequelize_1.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
     },
     chatId: {
         type: sequelize_1.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
     },
     messageId: {
         type: sequelize_1.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
     },
 }, {
     sequelize: _1.default,
@@ -37,12 +34,12 @@ UserMessages.init({
     underscored: true,
 });
 UserMessages.belongsTo(Users_1.default, {
-    foreignKey: 'user_id',
+    foreignKey: 'userId',
 });
 UserMessages.belongsTo(Chats_1.default, {
-    foreignKey: 'chat_id',
+    foreignKey: 'chatId',
 });
 UserMessages.belongsTo(Messages_1.default, {
-    foreignKey: 'message_id',
+    foreignKey: 'messageId',
 });
 exports.default = UserMessages;

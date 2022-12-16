@@ -7,6 +7,13 @@ const router = Router();
 router.get(
   '/', 
   verifyJwt,
-  chatsController.getAll)
+  chatsController.getAll,
+);
+
+router.post(
+  '/:username',
+  verifyJwt,
+  chatsController.create,
+);
 
 export default router;

@@ -12,22 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const services_1 = require("../services");
-const mapError_1 = __importDefault(require("../utils/mapError"));
-const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { user: { id } } = req.body;
-    const { message } = yield services_1.chatsService.getAll(+id);
-    res.status(200).json(message);
+const Users_1 = __importDefault(require("../../database/models/Users"));
+const chats_service_1 = __importDefault(require("../chats.service"));
+const newChatValidation = (username, id) => __awaiter(void 0, void 0, void 0, function* () {
+    const { message: chats } = yield chats_service_1.default.getAll(id);
+    const doesTheChatExist = chats.find((chat) => chat.username === username);
+    if (doesTheChatExist)
+        return { type: 'INVALID_VALUE', message: 'Chat already exists' };
+    const userLogged = yield Users_1.default.findByPk(id);
+    const { username: usernameIsValid } = userLogged;
+    if (usernameIsValid === username)
+        return { type: 'INVALID_VALUE', message: 'Invalid username' };
+    return { type: null, message: '' };
 });
-const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { user: { id } } = req.body;
-    const { username } = req.params;
-    const { type, message } = yield services_1.chatsService.create(username, id);
-    if (type)
-        return res.status((0, mapError_1.default)(type)).json({ message });
-    res.status(201).json({ message });
-});
-exports.default = {
-    getAll,
-    create,
-};
+exports.default = newChatValidation;

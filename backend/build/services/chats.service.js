@@ -12,8 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const Chats_1 = __importDefault(require("../database/models/Chats"));
 const UserChat_1 = __importDefault(require("../database/models/UserChat"));
 const Users_1 = __importDefault(require("../database/models/Users"));
+const validations_1 = require("./validations");
 const getAll = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const chats = yield UserChat_1.default.findAll({
         where: { userId: id }
@@ -24,19 +26,37 @@ const getAll = (id) => __awaiter(void 0, void 0, void 0, function* () {
         });
         return userIds;
     }));
-    const listOfChats = yield Promise.all(promises);
-    const onlyId = listOfChats.flat().map(({ userId }) => userId);
-    const result = [...new Set(onlyId)].filter((i) => i !== id);
-    const usersChat = result.map((u) => __awaiter(void 0, void 0, void 0, function* () { return Users_1.default.findByPk(u); }));
+    const result = yield Promise.all(promises);
+    const onlyId = result.flat().map(({ userId }) => userId);
+    const listOfuserId = [...new Set(onlyId)].filter((i) => i !== id);
+    const usersChat = listOfuserId.map((u) => __awaiter(void 0, void 0, void 0, function* () { return Users_1.default.findByPk(u); }));
     const promiseUsersChat = yield Promise.all(usersChat);
-    const myUsersChat = promiseUsersChat.map((obj) => ({
+    const myUsersChat = promiseUsersChat.map((obj, index) => ({
         name: obj.name,
         lastName: obj.lastName,
         username: obj.username,
         image: obj.image,
+        chatId: result[index][0].chatId,
+        userId: obj.id,
     }));
     return { type: null, message: myUsersChat };
 });
+const createChat = () => __awaiter(void 0, void 0, void 0, function* () {
+    const { id: chatId } = yield Chats_1.default.create();
+    return chatId;
+});
+const create = (username, id) => __awaiter(void 0, void 0, void 0, function* () {
+    const { type, message } = yield (0, validations_1.newChatValidation)(username, id);
+    if (type)
+        return { type, message };
+    const chatId = yield createChat();
+    yield UserChat_1.default.create({ userId: id, chatId });
+    const result = yield Users_1.default.findOne({ where: { username } });
+    const { id: userId } = result;
+    yield UserChat_1.default.create({ userId, chatId });
+    return { type: null, message: 'chat created successfully' };
+});
 exports.default = {
     getAll,
+    create,
 };

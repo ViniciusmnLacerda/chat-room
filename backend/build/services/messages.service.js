@@ -12,22 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const services_1 = require("../services");
-const mapError_1 = __importDefault(require("../utils/mapError"));
-const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { user: { id } } = req.body;
-    const { message } = yield services_1.chatsService.getAll(+id);
-    res.status(200).json(message);
-});
-const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { user: { id } } = req.body;
-    const { username } = req.params;
-    const { type, message } = yield services_1.chatsService.create(username, id);
-    if (type)
-        return res.status((0, mapError_1.default)(type)).json({ message });
-    res.status(201).json({ message });
+const UserMessages_1 = __importDefault(require("../database/models/UserMessages"));
+const getAll = (chatId) => __awaiter(void 0, void 0, void 0, function* () {
+    const userMessages = yield UserMessages_1.default.findAll({ where: { chatId } });
+    return { type: null, message: userMessages };
 });
 exports.default = {
     getAll,
-    create,
 };
