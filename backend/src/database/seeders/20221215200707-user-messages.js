@@ -35,7 +35,7 @@ module.exports = {
         message_id: 6,
       },
       {
-        user_id: 2,
+        user_id: 3,
         chat_id: 3,
         message_id: 7,
       },

@@ -33,6 +33,8 @@ const getAll = async (chatId: number, userId: number): Promise<IReturn<IMsg | st
       message: messages[index].message,
       date: messages[index].date,
       username: usernames[index].username,
+      name: usernames[index].name,
+      lastName: usernames[index].lastName,
     })
   })
 

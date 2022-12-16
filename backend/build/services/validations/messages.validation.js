@@ -12,16 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const services_1 = require("../services");
-const mapError_1 = __importDefault(require("../utils/mapError"));
-const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { chatId } = req.params;
-    const { user: { id: userId } } = req.body;
-    const { type, message } = yield services_1.messagesService.getAll(+chatId, +userId);
-    if (type)
-        return res.status((0, mapError_1.default)(type)).json({ message });
-    res.status(200).json(message);
+const UserChat_1 = __importDefault(require("../../database/models/UserChat"));
+const messagesValidation = (chatId, userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const userMessages = yield UserChat_1.default.findAll({ where: { chatId } });
+    const isValid = userMessages.find((userMessage) => userMessage.userId === userId);
+    if (!isValid)
+        return { type: 'INVALID_VALUE', message: 'Not authorized' };
+    return { type: null, message: '' };
 });
-exports.default = {
-    getAll,
-};
+exports.default = messagesValidation;

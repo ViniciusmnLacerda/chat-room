@@ -25,7 +25,7 @@ module.exports = {
         chat_id: 3
       },
       {
-        user_id: 2,
+        user_id: 3,
         chat_id: 3
       },
     ], { timestamps: false });
