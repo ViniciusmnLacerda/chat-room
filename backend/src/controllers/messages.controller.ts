@@ -7,7 +7,7 @@ const getAll = async (req: Request, res: Response) => {
   const { user: { id: userId } } = req.body;
   const { type, message } = await messagesService.getAll(+chatId, +userId);
   if (type) return res.status(mapError(type)).json({ message });
-  res.status(200).json(message)
+  res.status(200).json(message);
 }
 
 const create = async (req: Request, res: Response) => {

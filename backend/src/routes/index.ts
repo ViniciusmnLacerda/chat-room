@@ -5,5 +5,5 @@ import usersRoute from './user.routes';
 export {
   usersRoute,
   chatsRoute,
-  messagesRoute
+  messagesRoute,
 };

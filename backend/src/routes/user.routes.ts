@@ -4,16 +4,18 @@ import { loginMiddleware, signupMiddleware } from '../middlewares';
 
 const router = Router();
 
-router.get('/', usersController.getAll)
+router.get('/', usersController.getAll);
 
 router.post(
   '/login',
   loginMiddleware,
-  usersController.login)
+  usersController.login,
+);
 
 router.post(
   '/signup', 
   signupMiddleware,
-  usersController.signup);
+  usersController.signup,
+);
 
 export default router;

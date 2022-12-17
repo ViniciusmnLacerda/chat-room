@@ -6,7 +6,7 @@ import chatsService from "../chats.service";
 const newChatValidation = async (username: string, id: number): Promise<IReturn<string>> => {
   const { message: chats } = await chatsService.getAll(id);
   const doesTheChatExist = chats.find((chat) => chat.username === username);
-  if (doesTheChatExist) return { type: 'INVALID_VALUE', message: 'Chat already exists' }
+  if (doesTheChatExist) return { type: 'INVALID_VALUE', message: 'Chat already exists' };
   const userLogged = await usersModel.findByPk(id);
   const { username: usernameIsValid } = userLogged as IUser;
   if (usernameIsValid === username) return { type: 'INVALID_VALUE', message: 'Invalid username' };

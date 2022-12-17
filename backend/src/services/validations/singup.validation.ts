@@ -8,7 +8,7 @@ const signupValidation = async ({ email, username }: IUser): Promise<IReturn<str
   if (isEmailValid) return { type: 'INVALID_VALUE', message: 'Email is already in use'};
   const isUsernameValid = users.find((u) => u.username === username);
   if (isUsernameValid) return { type: 'INVALID_VALUE', message: 'Username is already in use'};
-  return { type: null, message: ''}
+  return { type: null, message: ''};
 }
 
 export default signupValidation;

@@ -14,9 +14,9 @@ const getAll = async (): Promise<IReturn<IUser[]>> => {
 const login = async (user: IUser): Promise<IReturn<string>> => {
   const { type, message } = await loginValidation(user);
   if (type) return { type, message };
-  const userLoged = await userModel.findOne({ where: { email: user.email }})
+  const userLoged = await userModel.findOne({ where: { email: user.email }});
   const token = createToken(userLoged as IUser);
-  return { type: null, message: token }
+  return { type: null, message: token };
 }
 
 const signup = async (user: IUser): Promise<IReturn<string>> => {
@@ -26,7 +26,7 @@ const signup = async (user: IUser): Promise<IReturn<string>> => {
   const hashedPassword = hashPassword(user.password as string);
   user.password = hashedPassword;
   await userModel.create({ ...user });
-  return { type: null, message: 'successfully registered user'}
+  return { type: null, message: 'successfully registered user'};
 }
 
 export default {
