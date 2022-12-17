@@ -7,7 +7,7 @@ const router = Router();
 router.get('/', usersController.getAll)
 
 router.post(
-  '/',
+  '/login',
   loginMiddleware,
   usersController.login)
 

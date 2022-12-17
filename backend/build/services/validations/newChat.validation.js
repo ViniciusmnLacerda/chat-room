@@ -23,6 +23,10 @@ const newChatValidation = (username, id) => __awaiter(void 0, void 0, void 0, fu
     const { username: usernameIsValid } = userLogged;
     if (usernameIsValid === username)
         return { type: 'INVALID_VALUE', message: 'Invalid username' };
+    const users = yield Users_1.default.findAll();
+    const doesTheUserExist = users.find((u) => u.username === username);
+    if (!doesTheUserExist)
+        return { type: 'INVALID_VALUE', message: 'Invalid username' };
     return { type: null, message: '' };
 });
 exports.default = newChatValidation;

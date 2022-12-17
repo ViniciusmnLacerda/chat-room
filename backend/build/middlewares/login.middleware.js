@@ -9,8 +9,7 @@ const loginMiddleware = (req, res, next) => {
     const user = req.body;
     const { error } = schemas_1.loginSchema.validate(user);
     if (error) {
-        const { type } = error.details[0];
-        const { message } = error.details[0];
+        const { type, message } = error.details[0];
         return res.status((0, mapError_1.default)(type)).json({ message });
     }
     next();

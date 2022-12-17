@@ -6,7 +6,7 @@ import IUser from '../interfaces/user.interface';
 import { loginValidation, signupValidation } from './validations';
 
 const getAll = async (): Promise<IReturn<IUser[]>> => {
-  const users = await userModel.findAll();
+  const users = await userModel.findAll({ attributes: { exclude: ['password'] } });
   return { type: null, message: users };
 }
 

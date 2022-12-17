@@ -23,10 +23,10 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json(message);
 });
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { message } = req.body;
+    const { message, user: { id: userId } } = req.body;
     const { chatId } = req.params;
-    const { message: result } = yield services_1.messagesService.create(+chatId, message);
-    res.status(201).json(result);
+    const { message: result } = yield services_1.messagesService.create(+chatId, +userId, message);
+    res.status(201).json({ message: result });
 });
 exports.default = {
     getAll,

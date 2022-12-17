@@ -54,7 +54,7 @@ const create = (username, id) => __awaiter(void 0, void 0, void 0, function* () 
     const result = yield Users_1.default.findOne({ where: { username } });
     const { id: userId } = result;
     yield UserChat_1.default.create({ userId, chatId });
-    return { type: null, message: 'chat created successfully' };
+    return { type: null, message: 'Chat created successfully' };
 });
 exports.default = {
     getAll,

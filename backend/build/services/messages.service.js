@@ -43,12 +43,12 @@ const getAll = (chatId, userId) => __awaiter(void 0, void 0, void 0, function* (
     });
     return { type: null, message: result };
 });
-const create = (chatId, message) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('AQUI: ', message);
+const create = (chatId, userId, message) => __awaiter(void 0, void 0, void 0, function* () {
     const { id: messageId } = yield Messages_1.default.create({ message });
-    return { type: null, message: messageId };
+    yield UserMessages_1.default.create({ userId, chatId, messageId });
+    return { type: null, message: 'Message created successfully' };
 });
 exports.default = {
     getAll,
-    create
+    create,
 };
