@@ -5,7 +5,7 @@ import IMessage from '../interfaces/messages.interface';
 import IMsg from '../interfaces/msg.interface';
 import IReturn from '../interfaces/returns.interface';
 import IUser from '../interfaces/user.interface';
-import { messagesValidation } from './validations';
+import { messagesValidation, newMessageValidation } from './validations';
 
 
 const getAll = async (chatId: number, userId: number): Promise<IReturn<IMsg | string>> => {
@@ -42,6 +42,8 @@ const getAll = async (chatId: number, userId: number): Promise<IReturn<IMsg | st
 } 
 
 const create = async (chatId: number, userId: number, message: string): Promise<IReturn<string>> => {
+  const { type, message: errorMessage } = await newMessageValidation(userId, chatId);
+  if (type) return { type, message: errorMessage };
   const { id: messageId } = await messagesModel.create({ message });
   await userMessagesModel.create({ userId, chatId, messageId });
   return { type: null, message: 'Message created successfully' };

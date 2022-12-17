@@ -11,9 +11,10 @@ const getAll = async (req: Request, res: Response) => {
 }
 
 const create = async (req: Request, res: Response) => {
-  const { message, user: { id: userId }  } = req.body;
+  const { message, user: { id: userId } } = req.body;
   const { chatId } = req.params;
-  const { message: result } = await messagesService.create(+chatId, +userId, message)
+  const { type, message: result } = await messagesService.create(+chatId, +userId, message)
+  if (type) return res.status(mapError(type)).json({ message: result });
   res.status(201).json({ message: result });
 }
 
