@@ -3,14 +3,25 @@ import { createToken } from '../auth/jwtFunctions';
 import userModel from '../database/models/Users';
 import IReturn from '../interfaces/returns.interface';
 import IUser from '../interfaces/user.interface';
-import { loginValidation, signupValidation } from './validations';
+import { loginValidation, signupValidation, userValidation } from './validations';
 
 const getAll = async (): Promise<IReturn<IUser[]>> => {
   const users = await userModel.findAll({ attributes: { exclude: ['password'] } });
   return { type: null, message: users };
 }
 
-//o login será feito com email e password
+const getUser = async (requestedEmail: string, userEmail: string): Promise<IReturn<IUser | null | string>> => {
+  const { type, message } = userValidation(requestedEmail, userEmail);
+  if (type) return { type, message };
+
+  const user = await userModel.findOne({
+    where: { email: requestedEmail },
+    attributes: { exclude: ['password'] },
+  });
+
+  return { type: null, message: user };
+}
+
 const login = async (user: IUser): Promise<IReturn<string>> => {
   const { type, message } = await loginValidation(user);
   if (type) return { type, message };
@@ -33,4 +44,5 @@ export default {
   getAll,
   login,
   signup,
+  getUser,
 };
