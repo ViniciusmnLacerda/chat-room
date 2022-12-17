@@ -26,7 +26,7 @@ function Login() {
     if (status === 200) {
       const { data: userData } = await getUserData(credentials.email, data.token);
       setUser(userData);
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', JSON.stringify(data.token));
       history.push('/home');
     } else {
       setLoginIsValid(false);

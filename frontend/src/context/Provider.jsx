@@ -5,6 +5,7 @@ import Context from './Context';
 
 function Provider({ children }) {
   const [loginIsValid, setLoginIsValid] = useState(true);
+  const [token, setToken] = useState('');
   const [user, setUser] = useState({
     username: '',
     name: '',
@@ -13,12 +14,17 @@ function Provider({ children }) {
     image: '',
     id: '',
   });
+  const [chats, setChats] = useState([]);
 
   const value = {
     user,
     setUser,
     loginIsValid,
     setLoginIsValid,
+    token,
+    setToken,
+    chats,
+    setChats,
   };
 
   return (
