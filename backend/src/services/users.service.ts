@@ -32,12 +32,12 @@ const login = async (user: IUser): Promise<IReturn<string>> => {
 
 const signup = async (user: IUser): Promise<IReturn<string>> => {
   const { type, message } = await signupValidation(user);
-  if (type) return { type, message}
+  if (type) return { type, message };
   const { password: pw } = user;
   const hashedPassword = hashPassword(user.password as string);
   user.password = hashedPassword;
   await userModel.create({ ...user });
-  return { type: null, message: 'successfully registered user'};
+  return { type: null, message: 'successfully registered user' };
 }
 
 export default {
