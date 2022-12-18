@@ -15,7 +15,9 @@ function Provider({ children }) {
     id: '',
   });
   const [chats, setChats] = useState([]);
-  const [doRenderBanner, setDoRenderBanner] = useState(false);
+  const [doRenderBanner, setDoRenderBanner] = useState(true);
+  const [messages, setMessages] = useState([]);
+
   const value = {
     user,
     setUser,
@@ -27,6 +29,8 @@ function Provider({ children }) {
     setChats,
     doRenderBanner,
     setDoRenderBanner,
+    messages,
+    setMessages,
   };
 
   return (

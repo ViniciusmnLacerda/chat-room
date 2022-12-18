@@ -1,19 +1,31 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
+import getMessages from '../services/getMessages';
 
 function Chats() {
-  const { chats } = useContext(Context);
+  const {
+    chats, token, setMessages, setDoRenderBanner,
+  } = useContext(Context);
+
+  const fetchMessages = async (chatId) => {
+    const { data, status } = await getMessages(chatId, token);
+    if (status === 200) {
+      setMessages(data);
+      setDoRenderBanner(false);
+    }
+  };
 
   return (
     <aside>
       <h2>Direct messages</h2>
       <main>
         {chats.map(({
-          name, lastName, userId, image,
+          name, lastName, userId, image, chatId,
         }) => (
           <button
             key={userId}
             type="button"
+            onClick={() => fetchMessages(chatId)}
           >
             <p>{`${name} ${lastName}`}</p>
             <img src={image} alt={`${name} ${lastName}`} width="30px" />
