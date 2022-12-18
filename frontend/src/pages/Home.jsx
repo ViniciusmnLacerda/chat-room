@@ -1,13 +1,25 @@
 import React, { useContext, useEffect } from 'react';
 import Alert from '../components/Alert';
+import Banner from '../components/Banner';
 import Chats from '../components/Chats';
+import Messages from '../components/Messages';
 import Context from '../context/Context';
 import getChats from '../services/getChats';
 
 function Home() {
   const {
-    token, setToken, loginIsValid, setLoginIsValid, setChats, user: { name, lastName },
+    token,
+    setToken,
+    loginIsValid,
+    setLoginIsValid,
+    setChats, user: { name, lastName },
+    doRenderBanner,
+    setDoRenderBanner,
   } = useContext(Context);
+
+  const setBanner = (e) => {
+    if (e.keyCode === 27) setDoRenderBanner(true);
+  };
 
   useEffect(() => {
     const tokenRecovered = JSON.parse(localStorage.getItem('token'));
@@ -15,6 +27,11 @@ function Home() {
       setLoginIsValid(false);
     }
     setToken(tokenRecovered);
+    window.addEventListener('keydown', setBanner);
+  }, []);
+
+  useEffect(() => () => {
+    window.removeEventListener('keydown', setBanner);
   }, []);
 
   useEffect(() => {
@@ -32,6 +49,7 @@ function Home() {
       <h1>{`Welcome, ${name} ${lastName}!`}</h1>
       <Chats />
       {!loginIsValid && <Alert />}
+      {doRenderBanner ? <Banner /> : <Messages />}
     </div>
   );
 }

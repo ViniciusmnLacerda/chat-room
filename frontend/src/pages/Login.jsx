@@ -10,6 +10,7 @@ function Login() {
     loginIsValid, setLoginIsValid, setUser,
   } = useContext(Context);
   const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [isBtnDisable, setIsBtnDisabled] = useState(true);
   const history = useHistory();
 
   const handleChange = ({ target }) => {
@@ -27,6 +28,7 @@ function Login() {
       const { data: userData } = await getUserData(credentials.email, data.token);
       setUser(userData);
       localStorage.setItem('token', JSON.stringify(data.token));
+      setLoginIsValid(true);
       history.push('/home');
     } else {
       setLoginIsValid(false);
@@ -34,6 +36,16 @@ function Login() {
   };
 
   useEffect(() => localStorage.removeItem('token'), []);
+
+  useEffect(() => {
+    const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+    const isCredentialsValid = [
+      credentials.password.length > 5,
+      emailRegex.test(credentials.email),
+    ].every(Boolean);
+    if (isCredentialsValid) setIsBtnDisabled(false);
+    else setIsBtnDisabled(true);
+  }, [credentials]);
 
   return (
     <main>
@@ -60,6 +72,7 @@ function Login() {
         </label>
         <button
           type="submit"
+          disabled={isBtnDisable}
         >
           Login
         </button>

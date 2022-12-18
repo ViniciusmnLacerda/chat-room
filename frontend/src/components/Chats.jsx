@@ -3,6 +3,7 @@ import Context from '../context/Context';
 
 function Chats() {
   const { chats } = useContext(Context);
+
   return (
     <aside>
       <h2>Direct messages</h2>

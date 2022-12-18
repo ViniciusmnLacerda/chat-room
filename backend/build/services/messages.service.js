@@ -44,6 +44,9 @@ const getAll = (chatId, userId) => __awaiter(void 0, void 0, void 0, function* (
     return { type: null, message: result };
 });
 const create = (chatId, userId, message) => __awaiter(void 0, void 0, void 0, function* () {
+    const { type, message: errorMessage } = yield (0, validations_1.newMessageValidation)(userId, chatId);
+    if (type)
+        return { type, message: errorMessage };
     const { id: messageId } = yield Messages_1.default.create({ message });
     yield UserMessages_1.default.create({ userId, chatId, messageId });
     return { type: null, message: 'Message created successfully' };

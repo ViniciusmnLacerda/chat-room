@@ -18,6 +18,14 @@ const getAll = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { message } = yield users_service_1.default.getAll();
     res.status(200).json(message);
 });
+const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email } = req.params;
+    const { user: { email: userEmail } } = req.body;
+    const { type, message } = yield users_service_1.default.getUser(email, userEmail);
+    if (type)
+        return res.status((0, mapError_1.default)(type)).json({ message });
+    res.status(200).json(message);
+});
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = req.body;
     const { type, message } = yield users_service_1.default.login(user);
@@ -36,4 +44,5 @@ exports.default = {
     getAll,
     login,
     signup,
+    getUser,
 };

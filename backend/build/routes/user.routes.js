@@ -5,6 +5,7 @@ const controllers_1 = require("../controllers");
 const middlewares_1 = require("../middlewares");
 const router = (0, express_1.Router)();
 router.get('/', controllers_1.usersController.getAll);
-router.post('/', middlewares_1.loginMiddleware, controllers_1.usersController.login);
+router.get('/:email', middlewares_1.verifyJwt, controllers_1.usersController.getUser);
+router.post('/login', middlewares_1.loginMiddleware, controllers_1.usersController.login);
 router.post('/signup', middlewares_1.signupMiddleware, controllers_1.usersController.signup);
 exports.default = router;

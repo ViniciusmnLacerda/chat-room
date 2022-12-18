@@ -25,7 +25,9 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { message, user: { id: userId } } = req.body;
     const { chatId } = req.params;
-    const { message: result } = yield services_1.messagesService.create(+chatId, +userId, message);
+    const { type, message: result } = yield services_1.messagesService.create(+chatId, +userId, message);
+    if (type)
+        return res.status((0, mapError_1.default)(type)).json({ message: result });
     res.status(201).json({ message: result });
 });
 exports.default = {
