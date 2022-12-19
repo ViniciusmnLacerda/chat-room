@@ -19,6 +19,7 @@ function Home() {
     setDoRenderBanner,
     openNewChat,
     setUser,
+    setOpenNewChat,
   } = useContext(Context);
 
   const setBanner = (e) => {
@@ -26,6 +27,8 @@ function Home() {
   };
 
   useEffect(() => {
+    setOpenNewChat(false);
+    setDoRenderBanner(true);
     const tokenRecovered = JSON.parse(localStorage.getItem('token'));
     if (!tokenRecovered) setLoginIsValid(false);
     else {
