@@ -40,10 +40,12 @@ const signup = async (user: IUser): Promise<IReturn<string>> => {
   return { type: null, message: 'successfully registered user' };
 }
 
-const update = async ({ name, lastName, image}: IUser, username: string): Promise<IReturn<IUser | null>> => {
-  await userModel.update({ name, lastName, image }, { where: { username }});
+const update = async ({ name, lastName, image}: IUser, email: string, requestedEmail: string): Promise<IReturn<IUser | null | string>> => {
+  const { type, message } = userValidation(requestedEmail, email);
+  if (type) return { type, message };
+  await userModel.update({ name, lastName, image }, { where: { email }});
   const userUpdated = await userModel.findOne({
-    where: { username },
+    where: { email },
     attributes: { exclude: ['password', 'id'] },
   });
   

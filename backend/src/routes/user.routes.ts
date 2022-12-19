@@ -28,7 +28,7 @@ router.post(
 
 
 router.put(
-  '/:username',
+  '/:email',
   verifyJwt,
   usersController.update,
 )

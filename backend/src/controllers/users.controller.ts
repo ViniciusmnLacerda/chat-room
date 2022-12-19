@@ -31,9 +31,11 @@ const signup = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   const user = req.body;
-  const { username } = req.params;
-  const { message } = await userService.update(user, username);
-  res.status(201).json({ message });
+  const { email } = req.params;
+  const { user: { email: userEmail } } = req.body; 
+  const { type, message } = await userService.update(user, email, userEmail);
+  if (type) return res.status(mapError(type)).json({ message });
+  res.status(201).json(message);
 }
 
 export default {
