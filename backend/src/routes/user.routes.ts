@@ -6,11 +6,10 @@ const router = Router();
 
 router.get(
   '/',
-  verifyJwt, 
   usersController.getAll);
 
 router.get(
-  '/:email',
+  '/:username',
   verifyJwt,
   usersController.getUser,
 )
@@ -27,4 +26,10 @@ router.post(
   usersController.signup,
 );
 
+
+router.put(
+  '/:username',
+  verifyJwt,
+  usersController.update,
+)
 export default router;

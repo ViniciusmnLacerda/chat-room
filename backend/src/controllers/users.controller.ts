@@ -8,15 +8,15 @@ const getAll = async (_req: Request, res: Response) => {
 }
 
 const getUser = async (req: Request, res: Response) => {
-  const { email } = req.params;
-  const { user: { email: userEmail } } = req.body;
-  const { type, message } = await userService.getUser(email, userEmail);
+  const { username } = req.params;
+  const { user: { username: userUsername } } = req.body; 
+  const { type, message } = await userService.getUser(username, userUsername);
   if (type) return res.status(mapError(type)).json({ message });
   res.status(200).json(message);
 }
 
 const login = async (req: Request, res: Response) => {
-  const user = req.body;
+  const user = req.body; 
   const { type, message } = await userService.login(user);
   if (type) return res.status(mapError(type)).json({ message });
   res.status(200).json({ token: message });
@@ -29,9 +29,17 @@ const signup = async (req: Request, res: Response) => {
   res.status(201).json({ message });
 }
 
+const update = async (req: Request, res: Response) => {
+  const user = req.body;
+  const { username } = req.params;
+  const { message } = await userService.update(user, username);
+  res.status(201).json({ message });
+}
+
 export default {
   getAll,
   login,
   signup,
   getUser,
+  update,
 }
