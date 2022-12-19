@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import React, { useContext, useEffect, useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 import Context from '../context/Context';
 import getUsers from '../services/getUsers';
 import postChat from '../services/postChat';
@@ -53,7 +54,7 @@ function NewChat() {
         type="button"
         onClick={() => setOpenNewChat(false)}
       >
-        Close
+        <AiOutlineClose />
       </button>
       <form>
         <label htmlFor="name">

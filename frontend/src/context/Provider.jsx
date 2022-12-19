@@ -20,6 +20,7 @@ function Provider({ children }) {
   const [chatId, setChatId] = useState('');
   const [openNewChat, setOpenNewChat] = useState(false);
   const [users, setUsers] = useState([]);
+  const [openProfile, setOpenProfile] = useState(false);
 
   const value = {
     user,
@@ -40,6 +41,8 @@ function Provider({ children }) {
     setOpenNewChat,
     users,
     setUsers,
+    openProfile,
+    setOpenProfile,
   };
 
   return (

@@ -2,8 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import Alert from '../components/Alert';
 import Banner from '../components/Banner';
 import Chats from '../components/Chats';
+import EditProfile from '../components/EditProfile';
 import Messages from '../components/Messages';
 import NewChat from '../components/NewChat';
+import Profile from '../components/Profile';
 import Context from '../context/Context';
 import getChats from '../services/getChats';
 
@@ -14,12 +16,12 @@ function Home() {
     loginIsValid,
     setLoginIsValid,
     setChats,
-    user: { name, lastName },
     doRenderBanner,
     setDoRenderBanner,
     openNewChat,
     setUser,
     setOpenNewChat,
+    openProfile,
   } = useContext(Context);
 
   const setBanner = (e) => {
@@ -55,7 +57,8 @@ function Home() {
 
   return (
     <div>
-      <h1>{`Welcome, ${name} ${lastName}!`}</h1>
+      <Profile />
+      {openProfile && <EditProfile />}
       {openNewChat && <NewChat />}
       <Chats />
       {!loginIsValid && <Alert />}
