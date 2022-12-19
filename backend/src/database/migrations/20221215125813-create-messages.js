@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -7,22 +7,22 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       message: {
         type: Sequelize.TEXT('long'),
-        allowNull: false,
+        allowNull: false
       },
       date: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW"),
-      },
-    });
+        defaultValue: Sequelize.fn('NOW')
+      }
+    })
 
-    return messagesTable;
+    return messagesTable
   },
 
   down: async (queryInterface, _Sequelize) => {
     return await queryInterface.dropTable('messages')
   }
-};
+}

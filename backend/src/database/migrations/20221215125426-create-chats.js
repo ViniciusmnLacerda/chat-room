@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -11,12 +11,12 @@ module.exports = {
       },
       createdAt: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW"),
-      },
-    });
+        defaultValue: Sequelize.fn('NOW')
+      }
+    })
   },
 
   down: async (queryInterface, _Sequelize) => {
     return await queryInterface.dropTable('chats')
   }
-};
+}
