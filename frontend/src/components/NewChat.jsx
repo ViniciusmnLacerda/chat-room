@@ -42,11 +42,8 @@ function NewChat() {
   }, [search]);
 
   const handleClick = async (username) => {
-    const { data, status } = await postChat(username, token);
-    console.log('username: ', username);
-    console.log('token: ', token);
-    console.log('data: ', data);
-    console.log('status: ', status);
+    const { status } = await postChat(username, token);
+    if (status === 201) setOpenNewChat(false);
   };
 
   return (
