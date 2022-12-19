@@ -17,10 +17,19 @@ const jwtFunctions_1 = require("../auth/jwtFunctions");
 const Users_1 = __importDefault(require("../database/models/Users"));
 const validations_1 = require("./validations");
 const getAll = () => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield Users_1.default.findAll();
+    const users = yield Users_1.default.findAll({ attributes: { exclude: ['password'] } });
     return { type: null, message: users };
 });
-//o login será feito com email e password
+const getUser = (requestedEmail, userEmail) => __awaiter(void 0, void 0, void 0, function* () {
+    const { type, message } = (0, validations_1.userValidation)(requestedEmail, userEmail);
+    if (type)
+        return { type, message };
+    const user = yield Users_1.default.findOne({
+        where: { email: requestedEmail },
+        attributes: { exclude: ['password'] },
+    });
+    return { type: null, message: user };
+});
 const login = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const { type, message } = yield (0, validations_1.loginValidation)(user);
     if (type)
@@ -43,4 +52,5 @@ exports.default = {
     getAll,
     login,
     signup,
+    getUser,
 };

@@ -1,10 +1,18 @@
 import { Router } from 'express';
 import { usersController } from '../controllers';
-import { loginMiddleware, signupMiddleware } from '../middlewares';
+import { loginMiddleware, signupMiddleware, verifyJwt } from '../middlewares';
 
 const router = Router();
 
-router.get('/', usersController.getAll);
+router.get(
+  '/',
+  usersController.getAll);
+
+router.get(
+  '/:email',
+  verifyJwt,
+  usersController.getUser,
+)
 
 router.post(
   '/login',
@@ -18,4 +26,10 @@ router.post(
   usersController.signup,
 );
 
+
+router.put(
+  '/:email',
+  verifyJwt,
+  usersController.update,
+)
 export default router;

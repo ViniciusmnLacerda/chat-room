@@ -16,6 +16,7 @@ const signupSchema = Joi.object({
 
 const messagesSchema = Joi.object({
   message: Joi.string().required(),
+  chatId: Joi.number().required(),
 })
 
 export {

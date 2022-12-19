@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -10,7 +10,7 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'users',
-          key: 'id',
+          key: 'id'
         }
       },
       chat_id: {
@@ -20,7 +20,7 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'chats',
-          key: 'id',
+          key: 'id'
         }
       },
       message_id: {
@@ -30,16 +30,15 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'messages',
-          key: 'id',
+          key: 'id'
         }
-      },
-    });
+      }
+    })
 
-    return userMessagesTable;
+    return userMessagesTable
   },
 
   down: async (queryInterface, _Sequelize) => {
     return await queryInterface.dropTable('user_messages')
   }
-};
-
+}

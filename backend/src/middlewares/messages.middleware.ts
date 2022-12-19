@@ -5,9 +5,10 @@ import { messagesSchema } from '../utils/schemas';
 
 const messagesMiddleware = (req: Request, res: Response, next: NextFunction): Response | void => {
   const { message } = req.body;
-  const { error } = messagesSchema.validate({ message });
+  const { chatId } = req.params;
+  const { error } = messagesSchema.validate({ message, chatId });
   if (error) {
-    const { type, message } = error.details[0]; 
+    const { type, message } = error.details[0];    
     return res.status(mapError(type)).json({ message });
   } 
   next();
