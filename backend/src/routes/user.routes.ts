@@ -9,7 +9,7 @@ router.get(
   usersController.getAll);
 
 router.get(
-  '/:username',
+  '/:email',
   verifyJwt,
   usersController.getUser,
 )

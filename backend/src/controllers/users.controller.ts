@@ -8,9 +8,9 @@ const getAll = async (_req: Request, res: Response) => {
 }
 
 const getUser = async (req: Request, res: Response) => {
-  const { username } = req.params;
-  const { user: { username: userUsername } } = req.body; 
-  const { type, message } = await userService.getUser(username, userUsername);
+  const { email } = req.params;
+  const { user: { email: userEmail } } = req.body; 
+  const { type, message } = await userService.getUser(email, userEmail);
   if (type) return res.status(mapError(type)).json({ message });
   res.status(200).json(message);
 }

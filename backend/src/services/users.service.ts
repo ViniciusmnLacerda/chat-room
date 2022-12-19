@@ -10,12 +10,12 @@ const getAll = async (): Promise<IReturn<IUser[]>> => {
   return { type: null, message: users };
 }
 
-const getUser = async (requestedUsername: string, userUsername: string): Promise<IReturn<IUser | null | string>> => {
-  const { type, message } = userValidation(requestedUsername, userUsername);
+const getUser = async (requestedEmail: string, userEmail: string): Promise<IReturn<IUser | null | string>> => {
+  const { type, message } = userValidation(requestedEmail, userEmail);
   if (type) return { type, message };
 
   const user = await userModel.findOne({
-    where: { username: requestedUsername },
+    where: { email: requestedEmail },
     attributes: { exclude: ['password', 'id'] },
   });
 
@@ -40,14 +40,12 @@ const signup = async (user: IUser): Promise<IReturn<string>> => {
   return { type: null, message: 'successfully registered user' };
 }
 
-const update = async ({ name, lastName, image }: IUser, username: string): Promise<IReturn<IUser | null>> => {
+const update = async ({ name, lastName, image}: IUser, username: string): Promise<IReturn<IUser | null>> => {
   await userModel.update({ name, lastName, image }, { where: { username }});
   const userUpdated = await userModel.findOne({
     where: { username },
     attributes: { exclude: ['password', 'id'] },
   });
-
-  console.log('aqui: ', name, lastName, image);
   
   return { type: null, message: userUpdated };
 }
