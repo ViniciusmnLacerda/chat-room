@@ -11,6 +11,7 @@ function NewChat() {
     token,
     setUsers,
     users,
+    user,
   } = useContext(Context);
   const [search, setSearch] = useState({ name: '' });
   const [usersToRender, setUsersToRender] = useState([]);
@@ -23,12 +24,13 @@ function NewChat() {
     const fetchUsers = async () => {
       const { data, status } = await getUsers();
       if (status === 200) {
-        data.forEach((user) => {
-          const fullName = `${user.name} ${user.lastName}`.toLowerCase();
-          user.fullName = fullName;
+        const listOfUsers = data.filter((u) => u.username !== user.username);
+        listOfUsers.forEach((u) => {
+          const fullName = `${u.name} ${u.lastName}`.toLowerCase();
+          u.fullName = fullName;
         });
-        data.sort((a, b) => (a.name > b.name ? 1 : -1));
-        setUsers(data);
+        listOfUsers.sort((a, b) => (a.name > b.name ? 1 : -1));
+        setUsers(listOfUsers);
       }
     };
     fetchUsers();
@@ -37,14 +39,14 @@ function NewChat() {
   useEffect(() => {
     if (search.name.length > 0) {
       const searchedName = search.name.toLowerCase();
-      const usersFiltered = users.filter((user) => user.fullName.includes(searchedName));
+      const usersFiltered = users.filter((u) => u.fullName.includes(searchedName));
       setUsersToRender(usersFiltered);
     } else setUsersToRender([]);
   }, [search]);
 
   const handleClick = async (username) => {
-    const { status } = await postChat(username, token);
-    if (status === 201) setOpenNewChat(false);
+    await postChat(username, token);
+    setOpenNewChat(false);
   };
 
   return (
