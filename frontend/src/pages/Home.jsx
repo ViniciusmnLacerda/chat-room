@@ -3,6 +3,7 @@ import Alert from '../components/Alert';
 import Banner from '../components/Banner';
 import Chats from '../components/Chats';
 import Messages from '../components/Messages';
+import NewChat from '../components/NewChat';
 import Context from '../context/Context';
 import getChats from '../services/getChats';
 
@@ -12,9 +13,12 @@ function Home() {
     setToken,
     loginIsValid,
     setLoginIsValid,
-    setChats, user: { name, lastName },
+    setChats,
+    user: { name, lastName },
     doRenderBanner,
     setDoRenderBanner,
+    openNewChat,
+    setUser,
   } = useContext(Context);
 
   const setBanner = (e) => {
@@ -23,11 +27,13 @@ function Home() {
 
   useEffect(() => {
     const tokenRecovered = JSON.parse(localStorage.getItem('token'));
-    if (!tokenRecovered) {
-      setLoginIsValid(false);
+    if (!tokenRecovered) setLoginIsValid(false);
+    else {
+      const userDataRecovered = JSON.parse(localStorage.getItem('userData'));
+      setUser(userDataRecovered);
+      setToken(tokenRecovered);
+      window.addEventListener('keydown', setBanner);
     }
-    setToken(tokenRecovered);
-    window.addEventListener('keydown', setBanner);
   }, []);
 
   useEffect(() => () => {
@@ -47,6 +53,7 @@ function Home() {
   return (
     <div>
       <h1>{`Welcome, ${name} ${lastName}!`}</h1>
+      {openNewChat && <NewChat />}
       <Chats />
       {!loginIsValid && <Alert />}
       {doRenderBanner ? <Banner /> : <Messages />}

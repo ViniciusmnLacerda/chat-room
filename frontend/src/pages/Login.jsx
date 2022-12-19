@@ -13,8 +13,7 @@ function Login() {
   const [isBtnDisable, setIsBtnDisabled] = useState(true);
   const history = useHistory();
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
+  const handleChange = ({ target: { name, value } }) => {
     setCredentials({
       ...credentials,
       [name]: value,
@@ -28,6 +27,7 @@ function Login() {
       const { data: userData } = await getUserData(credentials.email, data.token);
       setUser(userData);
       localStorage.setItem('token', JSON.stringify(data.token));
+      localStorage.setItem('userData', JSON.stringify(userData));
       setLoginIsValid(true);
       history.push('/home');
     } else {
@@ -35,7 +35,10 @@ function Login() {
     }
   };
 
-  useEffect(() => localStorage.removeItem('token'), []);
+  useEffect(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
+  }, []);
 
   useEffect(() => {
     const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
