@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { AiOutlineUser } from 'react-icons/ai';
 import Context from '../context/Context';
 import getMessages from '../services/getMessages';
 
@@ -40,7 +41,9 @@ function Chats() {
             onClick={() => fetchMessages(chatId)}
           >
             <p>{`${name} ${lastName}`}</p>
-            <img src={image} alt={`${name} ${lastName}`} width="30px" />
+            {image
+              ? <img src={image} alt={`${name} ${lastName}`} width="30px" />
+              : <AiOutlineUser />}
           </button>
         ))}
       </main>
