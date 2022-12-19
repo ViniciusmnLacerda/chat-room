@@ -4,7 +4,10 @@ import { loginMiddleware, signupMiddleware, verifyJwt } from '../middlewares';
 
 const router = Router();
 
-router.get('/', usersController.getAll);
+router.get(
+  '/',
+  verifyJwt, 
+  usersController.getAll);
 
 router.get(
   '/:email',
