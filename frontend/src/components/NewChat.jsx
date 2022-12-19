@@ -20,7 +20,7 @@ function NewChat() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const { data, status } = await getUsers(token);
+      const { data, status } = await getUsers();
       if (status === 200) {
         data.forEach((user) => {
           const fullName = `${user.name} ${user.lastName}`.toLowerCase();

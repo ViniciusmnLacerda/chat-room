@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Alert from '../components/Alert';
 import Context from '../context/Context';
 import getUserData from '../services/getUserData';
@@ -78,6 +78,11 @@ function Login() {
           disabled={isBtnDisable}
         >
           Login
+        </button>
+        <button
+          type="button"
+        >
+          <Link to="/signup">Signup</Link>
         </button>
       </form>
       {!loginIsValid && <Alert />}

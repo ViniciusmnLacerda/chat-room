@@ -1,13 +1,9 @@
 import axios from 'axios';
 
-const getUsers = async (token) => {
+const getUsers = async () => {
   const endpoint = 'http://localhost:3001/home';
   try {
-    const { data, status } = await axios.get(endpoint, {
-      headers: {
-        authorization: token,
-      },
-    });
+    const { data, status } = await axios.get(endpoint);
 
     return { data, status };
   } catch (e) {
