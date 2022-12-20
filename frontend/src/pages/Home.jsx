@@ -5,7 +5,6 @@ import Chats from '../components/Chats';
 import EditProfile from '../components/EditProfile';
 import Messages from '../components/Messages';
 import NewChat from '../components/NewChat';
-import Profile from '../components/Profile';
 import Context from '../context/Context';
 import getChats from '../services/getChats';
 import '../styles/home.css';
@@ -57,8 +56,7 @@ function Home() {
   }, [token]);
 
   return (
-    <div className="container">
-      <Profile />
+    <div className="home-container">
       {openProfile && <EditProfile />}
       {openNewChat && <NewChat />}
       <Chats />

@@ -1,0 +1,60 @@
+h2 {
+  font-weight: 150;
+  letter-spacing: 1px;
+}
+
+.chats-header {
+  width: 100%;
+  height: 35px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid black;
+}
+
+.chats-header button {
+  background-color: unset;
+  border: unset;
+}
+
+.chats-header button:hover{
+  cursor: pointer;
+  color: #F2F2F2;
+}
+
+.chats-header svg {
+  width: 30px;
+  height: 30px;
+}
+
+.visible {
+  width: 100%;
+  padding: 0 10px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.not-visible  {
+  display: none;
+}
+
+.chats main button {
+  background-color: white;
+  border: unset;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  padding: 10px 0;
+  border-bottom: 1px solid grey;
+}
+
+.chats main button img, .chats main button svg {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
