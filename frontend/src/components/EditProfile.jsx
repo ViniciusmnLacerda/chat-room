@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineLink, AiOutlineUser } from 'react-icons/ai';
 import Context from '../context/Context';
 import putUser from '../services/putUser';
+import '../styles/editProfile.css';
 
 function EditProfile() {
   const {
@@ -40,55 +41,65 @@ function EditProfile() {
   }, [credentials]);
 
   return (
-    <section>
-      EditProfile
-      <button
-        type="button"
-        onClick={() => setOpenProfile(false)}
-      >
-        <AiOutlineClose />
-      </button>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          <input
-            autoComplete="off"
-            placeholder="Name"
-            type="text"
-            name="name"
-            id="name"
-            value={credentials.name}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <label htmlFor="lastName">
-          <input
-            autoComplete="off"
-            placeholder="Last name"
-            type="text"
-            name="lastName"
-            id="lastName"
-            value={credentials.lastName}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <label htmlFor="image">
-          <input
-            autoComplete="off"
-            placeholder="URL image - optional"
-            type="url"
-            name="image"
-            id="image"
-            value={credentials.image}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <button
-          type="submit"
-          disabled={isBtnDisable}
+    <section className="edit-profile">
+      <div className="edit-profile-content">
+        <header>
+          <h1>Edit Profile</h1>
+          <button
+            type="button"
+            onClick={() => setOpenProfile(false)}
+          >
+            <AiOutlineClose />
+          </button>
+        </header>
+        <form
+          className="ed-form"
+          onSubmit={handleSubmit}
         >
-          Edit
-        </button>
-      </form>
+          <label htmlFor="name">
+            <AiOutlineUser fontSize={22} />
+            <input
+              autoComplete="off"
+              placeholder="Name"
+              type="text"
+              name="name"
+              id="name"
+              value={credentials.name}
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
+          <label htmlFor="lastName">
+            <AiOutlineUser fontSize={22} />
+            <input
+              autoComplete="off"
+              placeholder="Last name"
+              type="text"
+              name="lastName"
+              id="lastName"
+              value={credentials.lastName}
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
+          <label htmlFor="image">
+            <AiOutlineLink fontSize={22} />
+            <input
+              autoComplete="off"
+              placeholder="URL image - optional"
+              type="url"
+              name="image"
+              id="image"
+              value={credentials.image}
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
+          <button
+            type="submit"
+            disabled={isBtnDisable}
+          >
+            Edit
+          </button>
+        </form>
+      </div>
     </section>
   );
 }
