@@ -93,3 +93,12 @@
 .ed-form button:not(:disabled):hover {
   cursor: pointer;
 }
+
+
+@media screen and (min-width: 650px) {
+  .edit-profile {
+  width: 95%;
+  height: 95%;
+  max-width: 1500px;
+}
+}

@@ -57,11 +57,13 @@ function Home() {
 
   return (
     <div className="home-container">
-      {openProfile && <EditProfile />}
-      {openNewChat && <NewChat />}
-      <Chats />
-      {!loginIsValid && <Alert />}
-      {doRenderBanner ? <Banner /> : <Messages />}
+      <div className="card">
+        {openProfile && <EditProfile />}
+        {openNewChat && <NewChat />}
+        <Chats />
+        {!loginIsValid && <Alert />}
+        {doRenderBanner ? <Banner /> : <Messages />}
+      </div>
     </div>
   );
 }

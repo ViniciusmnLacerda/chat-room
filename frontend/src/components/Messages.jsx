@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 import Context from '../context/Context';
 import postMessage from '../services/postMessage';
 import '../styles/messages.css';
@@ -11,6 +12,7 @@ function Messages() {
     chatId,
     userMessage,
     user,
+    setDoRenderBanner,
   } = useContext(Context);
   const [text, setText] = useState({ message: '' });
   const [isBtnDisable, setIsBtnDisabled] = useState(true);
@@ -32,6 +34,12 @@ function Messages() {
       <article className="messages-content">
         <header>
           <h3>{userMessage}</h3>
+          <button
+            onClick={() => setDoRenderBanner(true)}
+            type="button"
+          >
+            <AiOutlineClose fontSize={22} />
+          </button>
         </header>
         <main className="chat-box">
           {messages.map(({

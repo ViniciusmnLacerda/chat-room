@@ -24,6 +24,20 @@
   letter-spacing: 1px;
 }
 
+.messages-content header button {
+  background-color: unset;
+  border: unset;
+}
+
+.messages-content header button:hover {
+  cursor: pointer;
+}
+
+.messages-content header button svg {
+  width: 20px;
+  height: 20px;
+}
+
 .chat-box {
   width: 100%;
   height: calc(100% - 35px);
@@ -103,4 +117,27 @@ footer {
   background-color: rgba(14, 42, 71, 1);
   color: white;
   font-size: 18px;
+}
+
+.footer-form button:hover {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 650px) {
+  .messages {
+    height: 100%;
+    width: 70%;
+  }
+
+  .messages footer {
+    position: unset;
+  }
+
+  .messages-content header {
+    height: 60px;
+  }
+
+  .chat-box {
+    height: calc(100% - 60px);
+  }
 }

@@ -61,3 +61,22 @@ h2 {
   height: 30px;
   border-radius: 100%;
 }
+
+@media screen and (min-width: 650px) { 
+  .chats {
+    height: calc(100% - 60px)
+  }
+  
+  .not-visible  {
+    width: 100%;
+    padding: 0 10px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  .not-visible, .visible {
+    height: calc(100% - 35px);
+  }
+}
