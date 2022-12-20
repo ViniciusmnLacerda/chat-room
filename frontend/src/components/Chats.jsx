@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AiOutlinePlus, AiOutlineUser } from 'react-icons/ai';
 import Context from '../context/Context';
 import getMessages from '../services/getMessages';
@@ -13,9 +13,9 @@ function Chats() {
     setDoRenderBanner,
     setChatId,
     setOpenNewChat,
+    isChatVisible,
+    setIsChatVisible,
   } = useContext(Context);
-
-  const [isChatVisible, setIsChatVisible] = useState(false);
 
   const fetchMessages = async (chatId) => {
     const { data, status } = await getMessages(chatId, token);
@@ -23,6 +23,7 @@ function Chats() {
       setMessages(data);
       setChatId(chatId);
       setDoRenderBanner(false);
+      setIsChatVisible(false);
     }
   };
 

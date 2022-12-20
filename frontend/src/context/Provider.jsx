@@ -21,6 +21,7 @@ function Provider({ children }) {
   const [openNewChat, setOpenNewChat] = useState(false);
   const [users, setUsers] = useState([]);
   const [openProfile, setOpenProfile] = useState(false);
+  const [isChatVisible, setIsChatVisible] = useState(false);
 
   const value = {
     user,
@@ -43,6 +44,8 @@ function Provider({ children }) {
     setUsers,
     openProfile,
     setOpenProfile,
+    isChatVisible,
+    setIsChatVisible,
   };
 
   return (
