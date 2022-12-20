@@ -8,6 +8,8 @@ function mapError(type) {
             return 422;
         case 'string.base':
             return 422;
+        case 'number.base':
+            return 422;
         default:
             return 500;
     }

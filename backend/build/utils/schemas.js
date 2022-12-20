@@ -21,5 +21,6 @@ const signupSchema = joi_1.default.object({
 exports.signupSchema = signupSchema;
 const messagesSchema = joi_1.default.object({
     message: joi_1.default.string().required(),
+    chatId: joi_1.default.number().required(),
 });
 exports.messagesSchema = messagesSchema;

@@ -26,7 +26,7 @@ const getUser = (requestedEmail, userEmail) => __awaiter(void 0, void 0, void 0,
         return { type, message };
     const user = yield Users_1.default.findOne({
         where: { email: requestedEmail },
-        attributes: { exclude: ['password'] },
+        attributes: { exclude: ['password', 'id'] },
     });
     return { type: null, message: user };
 });
@@ -48,9 +48,21 @@ const signup = (user) => __awaiter(void 0, void 0, void 0, function* () {
     yield Users_1.default.create(Object.assign({}, user));
     return { type: null, message: 'successfully registered user' };
 });
+const update = ({ name, lastName, image }, email, requestedEmail) => __awaiter(void 0, void 0, void 0, function* () {
+    const { type, message } = (0, validations_1.userValidation)(requestedEmail, email);
+    if (type)
+        return { type, message };
+    yield Users_1.default.update({ name, lastName, image }, { where: { email } });
+    const userUpdated = yield Users_1.default.findOne({
+        where: { email },
+        attributes: { exclude: ['password', 'id'] },
+    });
+    return { type: null, message: userUpdated };
+});
 exports.default = {
     getAll,
     login,
     signup,
     getUser,
+    update,
 };

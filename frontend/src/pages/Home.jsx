@@ -8,6 +8,7 @@ import NewChat from '../components/NewChat';
 import Profile from '../components/Profile';
 import Context from '../context/Context';
 import getChats from '../services/getChats';
+import '../styles/home.css';
 
 function Home() {
   const {
@@ -56,7 +57,7 @@ function Home() {
   }, [token]);
 
   return (
-    <div>
+    <div className="container">
       <Profile />
       {openProfile && <EditProfile />}
       {openNewChat && <NewChat />}

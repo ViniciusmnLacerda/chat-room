@@ -40,9 +40,19 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status((0, mapError_1.default)(type)).json({ message });
     res.status(201).json({ message });
 });
+const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = req.body;
+    const { email } = req.params;
+    const { user: { email: userEmail } } = req.body;
+    const { type, message } = yield users_service_1.default.update(user, email, userEmail);
+    if (type)
+        return res.status((0, mapError_1.default)(type)).json({ message });
+    res.status(201).json(message);
+});
 exports.default = {
     getAll,
     login,
     signup,
     getUser,
+    update,
 };

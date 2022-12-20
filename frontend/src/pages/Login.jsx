@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { AiOutlineMail } from 'react-icons/ai';
+import { RiLockPasswordLine } from 'react-icons/ri';
+import { useHistory } from 'react-router-dom';
 import Alert from '../components/Alert';
 import Context from '../context/Context';
 import getUserData from '../services/getUserData';
 import postLogin from '../services/postLogin';
+import '../styles/login.css';
 
 function Login() {
   const {
@@ -51,42 +54,55 @@ function Login() {
   }, [credentials]);
 
   return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">
-          <input
-            type="email"
-            autoComplete="off"
-            value={credentials.email}
-            onChange={(e) => handleChange(e)}
-            id="email"
-            name="email"
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            type="password"
-            autoComplete="off"
-            value={credentials.password}
-            onChange={(e) => handleChange(e)}
-            id="password"
-            name="password"
-          />
-        </label>
-        <button
-          type="submit"
-          disabled={isBtnDisable}
+    <div className="container">
+      <main className="home-credentials">
+        <header>
+          <h1>{'<Login />'}</h1>
+        </header>
+        <form
+          className="form-credentials"
+          onSubmit={handleSubmit}
         >
-          Login
-        </button>
-        <button
-          type="button"
-        >
-          <Link to="/signup">Signup</Link>
-        </button>
-      </form>
-      {!loginIsValid && <Alert />}
-    </main>
+          <label htmlFor="email">
+            <AiOutlineMail fontSize={22} />
+            <input
+              type="email"
+              placeholder="E-mail"
+              autoComplete="off"
+              value={credentials.email}
+              onChange={(e) => handleChange(e)}
+              id="email"
+              name="email"
+            />
+          </label>
+          <label htmlFor="password">
+            <RiLockPasswordLine fontSize={22} />
+            <input
+              placeholder="Password"
+              type="password"
+              autoComplete="off"
+              value={credentials.password}
+              onChange={(e) => handleChange(e)}
+              id="password"
+              name="password"
+            />
+          </label>
+          <button
+            type="submit"
+            disabled={isBtnDisable}
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            onClick={() => history.push('/signup')}
+          >
+            Signup
+          </button>
+        </form>
+        {!loginIsValid && <Alert />}
+      </main>
+    </div>
   );
 }
 
