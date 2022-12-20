@@ -140,4 +140,18 @@ footer {
   .chat-box {
     height: calc(100% - 60px);
   }
+
+  .chat-box::-webkit-scrollbar {
+    width: 2px;               /* width of the entire scrollbar */
+  }
+  
+  .chat-box::-webkit-scrollbar-track {
+    background: rgb(192, 192, 192)      /* color of the tracking area */
+  }
+  
+  .chat-box::-webkit-scrollbar-thumb {
+    background-color: grey;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid grey;  /* creates padding around scroll thumb */
+  }
 }

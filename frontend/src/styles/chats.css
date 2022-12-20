@@ -79,4 +79,27 @@ h2 {
   .not-visible, .visible {
     height: calc(100% - 35px);
   }
+
+  .not-visible button, .visible button {
+    font-size: 18px;
+  }
+
+  .chats main button img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .not-visible::-webkit-scrollbar, .visible::-webkit-scrollbar {
+    width: 5px;               /* width of the entire scrollbar */
+  }
+  
+  .not-visible::-webkit-scrollbar-track, .visible::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);        /* color of the tracking area */
+  }
+  
+  .not-visible::-webkit-scrollbar-thumb, .visible::-webkit-scrollbar-thumb {
+    background-color: grey;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid grey;  /* creates padding around scroll thumb */
+  }
 }

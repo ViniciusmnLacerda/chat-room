@@ -50,4 +50,8 @@
     width: 70%;
     height: 100%;
   }
+
+  .banner img {
+    height: 90%;
+  }
 }
