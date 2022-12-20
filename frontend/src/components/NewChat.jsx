@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
 import React, { useContext, useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
 import Context from '../context/Context';
 import getUsers from '../services/getUsers';
 import postChat from '../services/postChat';
+import '../styles/newChat.css';
 
 function NewChat() {
   const {
@@ -50,40 +51,47 @@ function NewChat() {
   };
 
   return (
-    <section>
-      <h2>New chat</h2>
-      <button
-        type="button"
-        onClick={() => setOpenNewChat(false)}
-      >
-        <AiOutlineClose />
-      </button>
-      <form>
-        <label htmlFor="name">
-          <input
-            type="text"
-            autoComplete="off"
-            value={search.name}
-            onChange={(e) => handleChange(e)}
-            id="name"
-            name="name"
-          />
-        </label>
-      </form>
-      <ul>
-        {usersToRender.map(({
-          name, lastName, id, username,
-        }) => (
-          <li key={id}>
+    <section className="new-chat">
+      <div className="new-chat-content">
+        <header>
+          <h1>New chat</h1>
+          <button
+            type="button"
+            onClick={() => setOpenNewChat(false)}
+          >
+            <AiOutlineClose />
+          </button>
+        </header>
+        <form className="nc-form">
+          <label htmlFor="name">
+            <AiOutlineSearch fontSize={22} />
+            <input
+              type="text"
+              autoComplete="off"
+              value={search.name}
+              onChange={(e) => handleChange(e)}
+              id="name"
+              name="name"
+            />
+          </label>
+        </form>
+        <main className="nc-list">
+          {usersToRender.map(({
+            name, lastName, id, username, image,
+          }) => (
             <button
               type="button"
               onClick={() => handleClick(username)}
+              key={id}
             >
-              {`${name} ${lastName}`}
+              {image
+                ? <img src={image} alt={`${name} ${lastName}`} width="30px" />
+                : <AiOutlineUser />}
+              <p>{`${name} ${lastName}`}</p>
             </button>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </main>
+      </div>
     </section>
   );
 }

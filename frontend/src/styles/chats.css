@@ -21,7 +21,6 @@ h2 {
 
 .chats-header button:hover{
   cursor: pointer;
-  color: #F2F2F2;
 }
 
 .chats-header svg {
@@ -51,6 +50,10 @@ h2 {
   gap: 40px;
   padding: 10px 0;
   border-bottom: 1px solid grey;
+}
+
+.chats main button:hover {
+  cursor: pointer;
 }
 
 .chats main button img, .chats main button svg {
