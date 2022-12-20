@@ -16,6 +16,7 @@ function NewChat() {
   } = useContext(Context);
   const [search, setSearch] = useState({ name: '' });
   const [usersToRender, setUsersToRender] = useState([]);
+  const [controlBox, setControlBox] = useState(false);
 
   const handleChange = ({ target: { name, value } }) => {
     setSearch({ [name]: value });
@@ -41,8 +42,13 @@ function NewChat() {
     if (search.name.length > 0) {
       const searchedName = search.name.toLowerCase();
       const usersFiltered = users.filter((u) => u.fullName.includes(searchedName));
+      if (usersFiltered.length === 0) setControlBox(false);
       setUsersToRender(usersFiltered);
-    } else setUsersToRender([]);
+      setControlBox(true);
+    } else {
+      setUsersToRender([]);
+      setControlBox(false);
+    }
   }, [search]);
 
   const handleClick = async (username) => {
@@ -75,7 +81,7 @@ function NewChat() {
             />
           </label>
         </form>
-        <main className="nc-list">
+        <main className={controlBox ? 'nc-list' : ''}>
           {usersToRender.map(({
             name, lastName, id, username, image,
           }) => (

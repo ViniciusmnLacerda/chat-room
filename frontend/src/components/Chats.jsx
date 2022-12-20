@@ -15,15 +15,17 @@ function Chats() {
     setOpenNewChat,
     isChatVisible,
     setIsChatVisible,
+    setUserMessage,
   } = useContext(Context);
 
-  const fetchMessages = async (chatId) => {
+  const fetchMessages = async (chatId, name, lastName) => {
     const { data, status } = await getMessages(chatId, token);
     if (status === 200) {
       setMessages(data);
       setChatId(chatId);
       setDoRenderBanner(false);
       setIsChatVisible(false);
+      setUserMessage(`${name} ${lastName}`);
     }
   };
 
@@ -58,7 +60,7 @@ function Chats() {
             <button
               key={userId}
               type="button"
-              onClick={() => fetchMessages(chatId)}
+              onClick={() => fetchMessages(chatId, name, lastName)}
             >
               {image
                 ? <img src={image} alt={`${name} ${lastName}`} width="30px" />

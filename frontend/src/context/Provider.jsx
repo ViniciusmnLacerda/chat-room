@@ -22,6 +22,7 @@ function Provider({ children }) {
   const [users, setUsers] = useState([]);
   const [openProfile, setOpenProfile] = useState(false);
   const [isChatVisible, setIsChatVisible] = useState(false);
+  const [userMessage, setUserMessage] = useState('');
 
   const value = {
     user,
@@ -46,6 +47,8 @@ function Provider({ children }) {
     setOpenProfile,
     isChatVisible,
     setIsChatVisible,
+    userMessage,
+    setUserMessage,
   };
 
   return (

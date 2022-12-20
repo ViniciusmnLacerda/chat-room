@@ -1,9 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Context from '../context/Context';
 import postMessage from '../services/postMessage';
+import '../styles/messages.css';
+import formatHours from '../utils/formatHours';
 
 function Messages() {
-  const { messages, token, chatId } = useContext(Context);
+  const {
+    messages,
+    token,
+    chatId,
+    userMessage,
+    user,
+  } = useContext(Context);
   const [text, setText] = useState({ message: '' });
   const [isBtnDisable, setIsBtnDisabled] = useState(true);
 
@@ -20,23 +28,35 @@ function Messages() {
   useEffect(() => setIsBtnDisabled(text.message.length > 0), [text]);
 
   return (
-    <section>
-      <article>
-        {messages.map(({
-          message, date, username, name, lastName,
-        }) => (
-          <div key={`${date}_${message}_${username}`}>
-            <p>{username}</p>
-            <p>{`${name} ${lastName}`}</p>
-            <p>{date}</p>
-            <p>{message}</p>
-          </div>
-        ))}
+    <section className="messages">
+      <article className="messages-content">
+        <header>
+          <h3>{userMessage}</h3>
+        </header>
+        <main className="chat-box">
+          {messages.map(({
+            message, date, username,
+          }) => (
+            <div>
+              <div
+                key={`${date}_${message}_${username}`}
+                className={user.username === username ? 'right-message' : 'left-message'}
+              >
+                <p className="text">{message}</p>
+                <p className="hours">{formatHours(date)}</p>
+              </div>
+            </div>
+          ))}
+        </main>
       </article>
       <footer>
-        <form onSubmit={handleSubmit}>
+        <form
+          className="footer-form"
+          onSubmit={handleSubmit}
+        >
           <label htmlFor="message">
             <input
+              placeholder="Message"
               type="text"
               autoComplete="off"
               value={text.message}

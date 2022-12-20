@@ -20,6 +20,13 @@
   border-radius: 100%;
 }
 
+.profile div {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .profile button {
   background-color: unset;
   border: unset;
