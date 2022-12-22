@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import Context from '../context/Context';
@@ -44,10 +45,10 @@ function Messages() {
         <main className="chat-box">
           {messages.map(({
             message, date, username,
-          }) => (
+          }, index) => (
             <div>
               <div
-                key={`${date}_${message}_${username}`}
+                key={`${date}_${message}_${username}_${index}`}
                 className={user.username === username ? 'right-message' : 'left-message'}
               >
                 <p className="text">{message}</p>

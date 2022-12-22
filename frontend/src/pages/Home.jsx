@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import useWebSocket from 'react-use-websocket';
 import Alert from '../components/Alert';
 import Banner from '../components/Banner';
 import Chats from '../components/Chats';
@@ -22,6 +23,7 @@ function Home() {
     setUser,
     setOpenNewChat,
     openProfile,
+    setHaveNewMessage,
   } = useContext(Context);
 
   const setBanner = (e) => {
@@ -54,6 +56,13 @@ function Home() {
     };
     fetchChats();
   }, [token]);
+
+  const { lastJsonMessage } = useWebSocket('ws://localhost:3001', {
+    onMessage: () => {
+      if (lastJsonMessage) setHaveNewMessage(true);
+    },
+    reconnectInterval: 3000,
+  });
 
   return (
     <div className="home-container">
