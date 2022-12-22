@@ -23,6 +23,12 @@ function Provider({ children }) {
   const [openProfile, setOpenProfile] = useState(false);
   const [isChatVisible, setIsChatVisible] = useState(false);
   const [userMessage, setUserMessage] = useState('');
+  const [haveNewMessage, setHaveNewMessage] = useState(false);
+  const [whichOpenChat, setWhichOpenChat] = useState({
+    chatId: '',
+    name: '',
+    lastName: '',
+  });
 
   const value = {
     user,
@@ -49,6 +55,10 @@ function Provider({ children }) {
     setIsChatVisible,
     userMessage,
     setUserMessage,
+    haveNewMessage,
+    setHaveNewMessage,
+    whichOpenChat,
+    setWhichOpenChat,
   };
 
   return (
