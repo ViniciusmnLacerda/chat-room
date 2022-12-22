@@ -79,8 +79,8 @@ There are six previously registered users:
 
 ### Screenshots
 <div>
-  <img src="rdm1.png" alt="1" width="200"/>
-  <img src="rdm2.png" alt="2" width="200"/>
-  <img src="rdm3.png" alt="3" width="200"/>
-  <img src="rdm4.png" alt="4" width="200"/>
+  <img src="rdm1.png" alt="1" width="500"/>
+  <img src="rdm2.png" alt="2" width="500"/>
+  <img src="rdm3.png" alt="3" width="500"/>
+  <img src="rdm4.png" alt="4" width=500"/>
 </div>
