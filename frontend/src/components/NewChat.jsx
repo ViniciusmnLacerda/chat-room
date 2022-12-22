@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineClose, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
 import Context from '../context/Context';
+import getChats from '../services/getChats';
 import getUsers from '../services/getUsers';
 import postChat from '../services/postChat';
 import '../styles/newChat.css';
@@ -13,6 +14,8 @@ function NewChat() {
     setUsers,
     users,
     user,
+    setChats,
+    setHaveNewMessage,
   } = useContext(Context);
   const [search, setSearch] = useState({ name: '' });
   const [usersToRender, setUsersToRender] = useState([]);
@@ -53,6 +56,11 @@ function NewChat() {
 
   const handleClick = async (username) => {
     await postChat(username, token);
+    const { data, status } = await getChats(token);
+    if (status === 200) {
+      setChats(data);
+      setHaveNewMessage(false);
+    }
     setOpenNewChat(false);
   };
 

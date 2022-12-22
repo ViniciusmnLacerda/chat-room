@@ -24,10 +24,18 @@ function Home() {
     setOpenNewChat,
     openProfile,
     setHaveNewMessage,
+    setWhichOpenChat,
   } = useContext(Context);
 
   const setBanner = (e) => {
-    if (e.keyCode === 27) setDoRenderBanner(true);
+    if (e.keyCode === 27) {
+      setWhichOpenChat({
+        chatId: '',
+        name: '',
+        lastName: '',
+      });
+      setDoRenderBanner(true);
+    }
   };
 
   useEffect(() => {

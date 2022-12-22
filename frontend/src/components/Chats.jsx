@@ -29,7 +29,6 @@ function Chats() {
       setMessages(data);
       setChatId(chatId);
       setDoRenderBanner(false);
-      setIsChatVisible(false);
       setUserMessage(`${name} ${lastName}`);
       setHaveNewMessage(false);
     }
@@ -71,7 +70,10 @@ function Chats() {
             <button
               key={userId}
               type="button"
-              onClick={() => fetchMessages(chatId, name, lastName)}
+              onClick={() => {
+                fetchMessages(chatId, name, lastName);
+                setIsChatVisible(false);
+              }}
             >
               {image
                 ? <img src={image} alt={`${name} ${lastName}`} width="30px" />
